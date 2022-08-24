@@ -17,10 +17,9 @@
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 @use "../color.scss";
+@use "../common.scss";
 
 .TimesheetTable {
-  color: color.$text;
-
   td + td, th + th {
     padding-left: 0.3em;
   }
@@ -57,8 +56,6 @@
   }
 
   td input {
-    color: color.$text;
-
     border: 1px solid color.$border;
     border-radius: 4px;
   }

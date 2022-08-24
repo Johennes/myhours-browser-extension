@@ -16,33 +16,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-@use "../color.scss";
-@use "../common.scss";
+@use "color.scss";
 
-.TimesheetHeader {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 1em;
-
-  span {
-    flex-grow: 1;
-    text-align: center;
-    font-weight: bold;
-    font-size: 110%;
-  }
-
-  button {
-    text-align: center;
-    background-color: color.$primary-background;
-    color: color.$action;
-    border: 1px solid color.$action;
-    border-radius: 4px;
-  }
-
-  button:hover {
-    background-color: color.$action;
-    color: color.$text-light;
-    cursor: pointer;
-  }
+* {
+  color: color.$text;
 }

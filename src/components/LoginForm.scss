@@ -17,10 +17,9 @@
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 @use "../color.scss";
+@use "../common.scss";
 
 .LoginForm {
-  color: color.$text;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,8 +32,6 @@
   }
 
   input[type=text], input[type=password] {
-    color: color.$text;
-
     margin-bottom: 1em;
     border: 1px solid color.$border;
     border-radius: 4px;
