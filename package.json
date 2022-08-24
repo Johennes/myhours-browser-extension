@@ -1,0 +1,48 @@
+{
+  "name": "myhours-browser-extension",
+  "version": "0.1.0",
+  "description": "Web extension for tracking time on myhours.com",
+  "author": "Johannes Marbach",
+  "license": "GPL-3.0-or-later",
+  "targets": {
+    "dev": {
+      "sourceMap": {
+        "inline": true,
+        "inlineSources": true
+      }
+    },
+    "prod": {}
+  },
+  "scripts": {
+    "watchdev": "parcel watch manifest.json --target dev",
+    "servedev": "web-ext run -s dist/dev/",
+    "watchprod": "parcel watch manifest.json --target prod",
+    "serveprod": "web-ext run -s dist/prod/",
+    "build": "parcel build manifest.json --target prod && web-ext build -s dist/prod/"
+  },
+  "dependencies": {
+    "@types/node": "^18.7.6",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@types/webextension-polyfill": "^0.9.0",
+    "cross-fetch": "^3.1.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "webextension-polyfill": "^0.10.0"
+  },
+  "devDependencies": {
+    "@parcel/config-webextension": "^2.7.0",
+    "@parcel/transformer-sass": "^2.7.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard-with-typescript": "^22.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.30.1",
+    "parcel": "^2.7.0",
+    "process": "^0.11.10",
+    "typescript": "^4.7.4",
+    "web-ext": "^7.2.0"
+  }
+}

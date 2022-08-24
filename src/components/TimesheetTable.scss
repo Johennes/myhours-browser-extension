@@ -1,0 +1,90 @@
+// Copyright 2022 Johannes Marbach
+//
+// This file is part of myhours-browser-extension, hereafter referred
+// to as the program.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+.TimesheetTable {
+  td+td, th+th {
+    padding-left: 0.3em;
+  }
+
+  td {
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    border-top: 1px solid #dee2e6;
+  }
+
+  td:nth-child(1) {
+    width: 55%;
+  }
+
+  td:nth-child(2) {
+    width: 32%;
+  }
+
+  td:nth-child(3) {
+    width: 8%;
+  }
+
+  td:nth-child(4) {
+    width: 5%;
+  }
+
+  th {
+    color: #687481;
+    padding-bottom: 0.3em;
+  }
+
+  td input, td button {
+    width: 100%;
+    line-height: 1.35715;
+  }
+
+  td input {
+    color: #495057;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+
+  td input::placeholder {
+    color: #ced4da;
+    opacity: 1;
+  }
+
+  td input:disabled {
+    background-color: #e9ecef;
+  }
+
+  td button {
+    text-align: center;
+    background-color: white;
+    color: #f2593d;
+    border: 1px solid #f2593d;
+    border-radius: 4px;
+  }
+
+  td button:disabled {
+    color: #ced4da;
+    border-color: #ced4da;
+    background-color: #e9ecef;
+  }
+  
+  td button:not([disabled]):hover {
+    background-color: #f2593d;
+    color: white;
+    cursor: pointer;
+  }
+}

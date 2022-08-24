@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "myhours",
+  "description": "Web extension for tracking time on myhours.com",
+  "version": "0.1.0",
+  "icons": {
+    "48": "assets/icon.svg",
+    "96": "assets/icon.svg"
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": "assets/icon.svg",
+    "default_title": "Track time in myhours",
+    "default_popup": "src/static/Popup.html"
+  },
+  "options_ui": {
+    "page": "src/static/Options.html"
+  },
+  "permissions": [
+    "*://api2.myhours.com/api/*",
+    "storage"
+  ]
+}

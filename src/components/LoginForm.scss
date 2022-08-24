@@ -1,0 +1,87 @@
+// Copyright 2022 Johannes Marbach
+//
+// This file is part of myhours-browser-extension, hereafter referred
+// to as the program.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  form {
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  input[type=text], input[type=password] {
+    margin-bottom: 1em;
+    color: #495057;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    line-height: 1.35715;
+  };
+
+  input[type=text]:disabled, input[type=password]:disabled {
+    background-color: #e9ecef;
+  }
+
+  input[type=submit] {
+    text-align: center;
+    background-color: white;
+    color: #2dB67e;
+    border: 1px solid #2dB67e;
+    border-radius: 4px;
+  }
+
+  input[type=submit]:disabled {
+    color: #ced4da;
+    border-color: #ced4da;
+    background-color: #e9ecef;
+  }
+
+  input[type=submit]:not([disabled]):hover {
+    background-color: #2dB67e;
+    color: white;
+    cursor: pointer;
+  }
+
+  .status-container {
+    position: relative;
+    height: 0;
+    overflow: visible;
+
+    .Loader {
+      margin-top: 1em;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  
+    .error {
+      margin-top: 1em;
+      color: #f2593d;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+}
