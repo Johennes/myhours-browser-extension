@@ -16,18 +16,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-@use "../color.scss";
+$primary-background: white;
 
-.Popup {
-  color: color.$text;
+$action: #2dB67e;
+$negative: #f2593d;
 
-  display: flex;
-  flex-direction: column;
-  width: 768px;
-  height: 334px;
-  padding: 0.5em;
+$text: #495057;
+$text-light: white;
 
-  .LoginForm, .Popup_spacer {
-    flex-grow: 1;
-  }
-}
+$border: #ced4da;
+$disabled: #e9ecef;

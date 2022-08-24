@@ -16,42 +16,41 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+@use "../color.scss";
+
 .Footer {
+  color: color.$text;
+
   display: flex;
   flex-direction: row;
   justify-content: right;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid color.$border;
   padding-top: 0.5em;
 
-  button+button {
+  .Footer_button + .Footer_button {
     margin-left: 0.3em;
   }
 
-  .options-button {
+  .Footer_button {
     text-align: center;
-    background-color: white;
-    color: #2dB67e;
-    border: 1px solid #2dB67e;
+    background-color: color.$primary-background;
+    color: color.$action;
+    border: 1px solid color.$action;
     border-radius: 4px;
   }
 
-  .options-button:hover {
-    background-color: #2dB67e;
-    color: white;
+  .Footer_button:hover {
+    background-color: color.$action;
+    color: color.$text-light;
     cursor: pointer;
   }
 
-  .log-out-button {
-    text-align: center;
-    background-color: white;
-    color: #f2593d;
-    border: 1px solid #f2593d;
-    border-radius: 4px;
+  .Footer_button_negative {
+    color: color.$negative;
+    border-color: color.$negative;
   }
   
-  .log-out-button:hover {
-    background-color: #f2593d;
-    color: white;
-    cursor: pointer;
+  .Footer_button_negative:hover {
+    background-color: color.$negative;
   }
 }

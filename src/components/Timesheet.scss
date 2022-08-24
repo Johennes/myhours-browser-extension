@@ -16,13 +16,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+@use "../color.scss";
+
 .Timesheet {
+  color: color.$text;
+
   display: flex;
   flex-direction: column;
 
-  .error {
+  .Timesheet_error {
     margin-top: 1em;
-    color: #f2593d;
+    color: color.$negative;
     text-align: center;
   }
 }

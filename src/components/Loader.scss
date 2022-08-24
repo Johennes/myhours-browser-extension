@@ -16,17 +16,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+@use "../color.scss";
+
 .Loader {
+  color: color.$text;
+
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 
-  .spinner {
+  .Loader_spinner {
     width: 2em;
     height: 2em;
-    border: 0.25em solid #eee;
-    border-top: 0.25em solid #2dB67e;
+    border: 0.25em solid color.$border;
+    border-top: 0.25em solid color.$action;
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
   }

@@ -57,7 +57,7 @@ const Popup: React.FC = () => {
     <div className="Popup">
       {!isLoggedIn && <LoginForm state={loginFormState} onSubmit={onLoginFormSubmit}/>}
       {isLoggedIn && <Timesheet/>}
-      {isLoggedIn && <div className="spacer"></div>}
+      {isLoggedIn && <div className="Popup_spacer"></div>}
       <Footer isLoggedIn={isLoggedIn} onLogOut={onLogOut}/>
     </div>
   );

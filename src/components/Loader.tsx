@@ -25,7 +25,7 @@ interface IProps {};
 export const Loader: React.FC<IProps> = (props) => {
   return (
     <div className="Loader">
-      <div className="spinner"/>
+      <div className="Loader_spinner"/>
     </div>
   );
 };

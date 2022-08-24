@@ -34,8 +34,8 @@ export const Footer: React.FC<IProps> = (props) => {
 
   return (
     <div className="Footer">
-      <button className="options-button" onClick={onOpenOptions}>Options</button>
-      {props.isLoggedIn && <button className="log-out-button" onClick={props.onLogOut}>Log out</button>}
+      <button className="Footer_button" onClick={onOpenOptions}>Options</button>
+      {props.isLoggedIn && <button className="Footer_button Footer_button_negative" onClick={props.onLogOut}>Log out</button>}
     </div>
   );
 };

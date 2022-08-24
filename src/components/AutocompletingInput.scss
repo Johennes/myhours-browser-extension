@@ -16,42 +16,44 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+@use "../color.scss";
+
 .AutocompletingInput {
-  .popup-container {
+  .AutocompletingInput_popup_container {
     position: relative;
   }
   
-  .popup {
+  .AutocompletingInput_popup {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     max-height: 10em;
     overflow: scroll;
-    background: white;
-    border: 1px solid #ced4da;
+    background: color.$primary-background;
+    border: 1px solid color.$border;
     border-top: none;
     border-radius: 4px;
-    box-shadow: 0 0 0.5em #ced4da;
+    box-shadow: 0 0 0.5em color.$border;
     font-size: 80%;
 
-    .completion + .completion {
-      border-top: 1px solid #ced4da;
+    .AutocompletingInput_completion + .AutocompletingInput_completion {
+      border-top: 1px solid color.$border;
     }
 
-    .completion {
+    .AutocompletingInput_completion {
       padding: 0.3em;
     }
 
-    .completion:hover {
+    .AutocompletingInput_completion:hover {
       cursor: pointer;
-      background-color: #2dB67e;
-      color: white;
+      background-color: color.$action;
+      color: color.$text-light;
     }
 
     .error {
       margin-top: 1em;
-      color: #f2593d;
+      color: color.$negative;
       text-align: center;
     }
   }

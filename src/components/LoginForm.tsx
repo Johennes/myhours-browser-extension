@@ -64,9 +64,9 @@ export const LoginForm: React.FC<IProps> = (props) => {
           value="Log in"
           disabled={props.state === LoginFormState.Loading}
           onClick={onSubmit}/>
-        <div className="status-container">
+        <div className="LoginForm_status_container">
           {props.state === LoginFormState.Loading && <Loader/>}
-          {props.state === LoginFormState.Failed && <div className="error">Login failed</div>}
+          {props.state === LoginFormState.Failed && <div className="LoginForm_error">Login failed</div>}
         </div>
       </form>
     </div>

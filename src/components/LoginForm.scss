@@ -16,7 +16,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+@use "../color.scss";
+
 .LoginForm {
+  color: color.$text;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,38 +33,39 @@
   }
 
   input[type=text], input[type=password] {
+    color: color.$text;
+
     margin-bottom: 1em;
-    color: #495057;
-    border: 1px solid #ced4da;
+    border: 1px solid color.$border;
     border-radius: 4px;
     line-height: 1.35715;
   };
 
   input[type=text]:disabled, input[type=password]:disabled {
-    background-color: #e9ecef;
+    background-color: color.$disabled;
   }
 
   input[type=submit] {
     text-align: center;
-    background-color: white;
-    color: #2dB67e;
-    border: 1px solid #2dB67e;
+    background-color: color.$primary-background;
+    color: color.$action;
+    border: 1px solid color.$action;
     border-radius: 4px;
   }
 
   input[type=submit]:disabled {
-    color: #ced4da;
-    border-color: #ced4da;
-    background-color: #e9ecef;
+    color: color.$border;
+    border-color: color.$border;
+    background-color: color.$border;
   }
 
   input[type=submit]:not([disabled]):hover {
-    background-color: #2dB67e;
-    color: white;
+    background-color: color.$action;
+    color: color.$text-light;
     cursor: pointer;
   }
 
-  .status-container {
+  .LoginForm_status_container {
     position: relative;
     height: 0;
     overflow: visible;
@@ -73,9 +78,9 @@
       width: 100%;
     }
   
-    .error {
+    .LoginForm_error {
       margin-top: 1em;
-      color: #f2593d;
+      color: color.$negative;
       position: absolute;
       top: 0;
       left: 0;

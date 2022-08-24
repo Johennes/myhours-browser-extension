@@ -16,7 +16,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+@use "../color.scss";
+
 .TimesheetHeader {
+  color: color.$text;
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -31,15 +35,15 @@
 
   button {
     text-align: center;
-    background-color: white;
-    color: #2dB67e;
-    border: 1px solid #2dB67e;
+    background-color: color.$primary-background;
+    color: color.$action;
+    border: 1px solid color.$action;
     border-radius: 4px;
   }
 
   button:hover {
-    background-color: #2dB67e;
-    color: white;
+    background-color: color.$action;
+    color: color.$text-light;
     cursor: pointer;
   }
 }

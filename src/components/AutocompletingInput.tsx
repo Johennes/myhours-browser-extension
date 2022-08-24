@@ -102,11 +102,11 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
           onFocus: onFocus,
           onChange: onChange
         }}/>
-      {showPopup && <div className="popup-container">
-        <div className="popup">
+      {showPopup && <div className="AutocompletingInput_popup_container">
+        <div className="AutocompletingInput_popup">
           {showCompletions && filtered.map((completion) =>
             <div
-              className="completion"
+              className="AutocompletingInput_completion"
               key={completion.id}
               onClick={e => onClick(e, completion)}
             >

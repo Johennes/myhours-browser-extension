@@ -167,7 +167,7 @@ export const Timesheet: React.FC<IProps> = (props) => {
         onChangeLogTask={(idx, task) => onChangeLog(idx, undefined, task, undefined)}
         onChangeLogDuration={(idx, duration) => onChangeLog(idx, undefined, undefined, duration)}
         onDeleteLog={onDeleteLog}/>}
-      {!isReloading && error && <div className="error">{error}</div>}
+      {!isReloading && error && <div className="Timesheet_error">{error}</div>}
     </div>
   );
 };
