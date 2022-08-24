@@ -47,16 +47,14 @@ export const LoginForm: React.FC<IProps> = (props) => {
   return (
     <div className="LoginForm">
       <form>
-        <label htmlFor="email">Email</label>
         <input
-          name="email"
+          placeholder="Email"
           type="text"
           value={email}
           disabled={props.state === LoginFormState.Loading}
           onChange={e => setEmail(e.target.value)}/>
-        <label htmlFor="password">Password</label>
         <input
-          name="password"
+          placeholder="Password"
           type="password"
           value={password}
           disabled={props.state === LoginFormState.Loading}
