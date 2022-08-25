@@ -18,6 +18,7 @@
 
 import React, { createRef, InputHTMLAttributes, useEffect, useState } from 'react';
 
+import { ErrorLabel } from './Error';
 import { ManagedInput } from './ManagedInput';
 
 import "./AutocompletingInput.scss";
@@ -112,7 +113,7 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
             >
               {completion.title}
             </div>)}
-          {showError && <div className="error">{error}</div>}
+          {showError && <ErrorLabel message={error}/>}
         </div>
       </div>}
     </div>

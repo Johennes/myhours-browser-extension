@@ -23,6 +23,7 @@ import { MyHoursProject } from "../api/structures/MyHoursProject";
 import { MyHoursLog } from "../api/structures/MyHoursLog";
 import { getClient } from '../utils/globals';
 import { isoDateString, utcMidnight } from '../utils/datetime';
+import { ErrorLabel } from './Error';
 import { Loader } from './Loader';
 import { TimesheetHeader } from './TimesheetHeader';
 import { TimesheetTable } from './TimesheetTable';
@@ -167,7 +168,7 @@ export const Timesheet: React.FC<IProps> = (props) => {
         onChangeLogTask={(idx, task) => onChangeLog(idx, undefined, task, undefined)}
         onChangeLogDuration={(idx, duration) => onChangeLog(idx, undefined, undefined, duration)}
         onDeleteLog={onDeleteLog}/>}
-      {!isReloading && error && <div className="Timesheet_error">{error}</div>}
+      {!isReloading && error && <ErrorLabel message={error}/>}
     </div>
   );
 };

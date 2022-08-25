@@ -75,14 +75,12 @@
       width: 100%;
     }
   
-    .LoginForm_error {
+    .Error {
       margin-top: 1em;
-      color: color.$negative;
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      text-align: center;
     }
   }
 

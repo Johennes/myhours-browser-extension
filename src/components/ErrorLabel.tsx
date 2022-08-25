@@ -16,13 +16,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-@use "../common.scss";
+import React from 'react';
 
-.Timesheet {
-  display: flex;
-  flex-direction: column;
+import "./ErrorLabel.scss";
 
-  .ErrorLabel {
-    margin-top: 1em;
-  }
-}
+interface IProps {
+  message: string
+};
+
+export const ErrorLabel: React.FC<IProps> = (props) => {
+  return (
+    <div className="Error">{props.message}</div>
+  );
+};

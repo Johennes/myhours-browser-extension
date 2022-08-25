@@ -16,13 +16,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+@use "../color.scss";
 @use "../common.scss";
 
-.Timesheet {
-  display: flex;
-  flex-direction: column;
-
-  .ErrorLabel {
-    margin-top: 1em;
-  }
+.Error {
+  color: color.$negative;
+  text-align: center;
 }

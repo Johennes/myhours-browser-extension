@@ -52,10 +52,8 @@
       color: color.$text-light;
     }
 
-    .AutocompletingInput_error {
+    .ErrorLabel {
       margin-top: 1em;
-      color: color.$negative;
-      text-align: center;
     }
   }
 }

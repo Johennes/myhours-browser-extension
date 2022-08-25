@@ -18,6 +18,7 @@
 
 import React, { useState } from 'react';
 
+import { ErrorLabel } from './Error';
 import { Loader } from './Loader';
 
 import "./LoginForm.scss";
@@ -66,7 +67,7 @@ export const LoginForm: React.FC<IProps> = (props) => {
           onClick={onSubmit}/>
         <div className="LoginForm_status_container">
           {props.state === LoginFormState.Loading && <Loader/>}
-          {props.state === LoginFormState.Failed && <div className="LoginForm_error">Login failed</div>}
+          {props.state === LoginFormState.Failed && <ErrorLabel message="Login failed"/>}
         </div>
       </form>
     </div>
