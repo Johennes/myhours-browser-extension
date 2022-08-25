@@ -18,7 +18,7 @@
 
 import React, { createRef, InputHTMLAttributes, useEffect, useState } from 'react';
 
-import { ErrorLabel } from './Error';
+import { ErrorLabel } from './ErrorLabel';
 import { ManagedInput } from './ManagedInput';
 
 import "./AutocompletingInput.scss";

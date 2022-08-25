@@ -18,7 +18,7 @@
 
 import React, { useState } from 'react';
 
-import { ErrorLabel } from './Error';
+import { ErrorLabel } from './ErrorLabel';
 import { Loader } from './Loader';
 
 import "./LoginForm.scss";

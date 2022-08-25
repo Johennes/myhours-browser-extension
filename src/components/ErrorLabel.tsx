@@ -26,6 +26,6 @@ interface IProps {
 
 export const ErrorLabel: React.FC<IProps> = (props) => {
   return (
-    <div className="Error">{props.message}</div>
+    <div className="ErrorLabel">{props.message}</div>
   );
 };
