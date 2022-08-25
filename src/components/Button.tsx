@@ -17,33 +17,45 @@
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 import React from 'react';
-import * as browser from 'webextension-polyfill';
 
-import { Button, ButtonType } from './Button';
+import "./Button.scss";
 
-import "./Footer.scss";
+export enum ButtonType {
+  Default,
+  Destructive,
+  Submit
+}
 
 interface IProps {
-  isLoggedIn: boolean;
-  onLogOut: () => void;
+  type: ButtonType;
+  title: string;
+  disabled?: boolean;
+  onClick?: (event: React.MouseEvent) => void;
 };
 
-export const Footer: React.FC<IProps> = (props) => {
-  const onOpenOptions = (event: React.MouseEvent) => {
-    browser.runtime.openOptionsPage();
-    window.close();
-  };
+export const Button: React.FC<IProps> = (props) => {
+  if (props.type === ButtonType.Default || props.type === ButtonType.Destructive) {
+    return (
+      <div className="Button">
+        <button
+          className={`Button_common ${props.type === ButtonType.Default ? "Button_default" : "Button_destructive"}`}
+          disabled={props.disabled}
+          onClick={props.onClick}
+        >
+          {props.title}
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div className="Footer">
-      <Button
-        type={ButtonType.Default}
-        title="Options"
-        onClick={onOpenOptions}/>
-      {props.isLoggedIn && <Button
-        type={ButtonType.Destructive}
-        title="Log out"
-        onClick={props.onLogOut}/>}
+    <div className="Button">
+      <input
+        className="Button_common Button_submit"
+        type="submit"
+        value={props.title}
+        disabled={props.disabled}
+        onClick={props.onClick}/>
     </div>
   );
 };

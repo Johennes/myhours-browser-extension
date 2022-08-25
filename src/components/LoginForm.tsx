@@ -18,6 +18,7 @@
 
 import React, { useState } from 'react';
 
+import { Button, ButtonType } from './Button';
 import { ErrorLabel } from './ErrorLabel';
 import { Loader } from './Loader';
 
@@ -60,9 +61,9 @@ export const LoginForm: React.FC<IProps> = (props) => {
           value={password}
           disabled={props.state === LoginFormState.Loading}
           onChange={e => setPassword(e.target.value)}/>
-        <input
-          type="submit"
-          value="Log in"
+        <Button
+          type={ButtonType.Submit}
+          title="Log in"
           disabled={props.state === LoginFormState.Loading}
           onClick={onSubmit}/>
         <div className="LoginForm_status_container">

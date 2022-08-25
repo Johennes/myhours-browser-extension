@@ -21,3 +21,21 @@
 * {
   color: color.$text;
 }
+
+input {
+  line-height: 1.35715;
+}
+
+input[type=text], input[type=password] {
+  border: 1px solid color.$border;
+  border-radius: 4px;
+}
+
+input[type=text]::placeholder, input[type=password]::placeholder {
+  color: color.$border;
+  opacity: 1;
+}
+
+input[type=text]:disabled, input[type=password]:disabled {
+  background-color: color.$disabled;
+}

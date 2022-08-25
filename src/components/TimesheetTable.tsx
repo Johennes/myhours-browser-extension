@@ -26,6 +26,7 @@ import { getClient } from '../utils/globals';
 import { combineClassNames } from '../utils/misc';
 import { AutocompletingInput, Completion } from './AutocompletingInput';
 import { ManagedInput } from './ManagedInput';
+import { Button, ButtonType } from './Button';
 
 import "./TimesheetTable.scss";
 
@@ -115,12 +116,11 @@ export const TimesheetTable: React.FC<IProps> = (props) => {
               }}/>
           </td>
           <td>
-            <button
+            <Button
+              type={ButtonType.Default}
+              title="del"
               disabled={!log.id}
-              onClick={_ => props.onDeleteLog(idx)}
-            >
-              del
-            </button>
+              onClick={_ => props.onDeleteLog(idx)}/>
           </td>
         </tr>)}
       </tbody>

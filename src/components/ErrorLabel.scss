@@ -19,7 +19,7 @@
 @use "../color.scss";
 @use "../common.scss";
 
-.Error {
+.ErrorLabel {
   color: color.$negative;
   text-align: center;
 }

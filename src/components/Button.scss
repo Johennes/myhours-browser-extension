@@ -1,0 +1,64 @@
+// Copyright 2022 Johannes Marbach
+//
+// This file is part of myhours-browser-extension, hereafter referred
+// to as the program.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+@use "../color.scss";
+@use "../common.scss";
+
+.Button {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+
+  .Button_common {
+    background-color: color.$background;
+    text-align: center;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    line-height: 1.35715;
+  }
+
+  .Button_common:disabled {
+    color: color.$border;
+    border-color: color.$border;
+    background-color: color.$disabled;
+  }
+
+  .Button_common:not([disabled]):hover {
+    color: color.$text-light;
+    cursor: pointer;
+  }
+
+  .Button_default, .Button_submit {
+    color: color.$action;
+    border-color: color.$action;
+  }
+
+  .Button_default:not([disabled]):hover, .Button_submit:not([disabled]):hover {
+    background-color: color.$action;
+  }
+
+  .Button_destructive {
+    color: color.$negative;
+    border-color: color.$negative;
+  }
+  
+  .Button_destructive:not([disabled]):hover {
+    background-color: color.$negative;
+  }
+}

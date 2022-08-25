@@ -52,40 +52,5 @@
 
   td input, td button {
     width: 100%;
-    line-height: 1.35715;
-  }
-
-  td input {
-    border: 1px solid color.$border;
-    border-radius: 4px;
-  }
-
-  td input::placeholder {
-    color: color.$border;
-    opacity: 1;
-  }
-
-  td input:disabled {
-    background-color: color.$disabled;
-  }
-
-  td button {
-    text-align: center;
-    background-color: color.$background;
-    color: color.$negative;
-    border: 1px solid color.$negative;
-    border-radius: 4px;
-  }
-
-  td button:disabled {
-    color: color.$border;
-    border-color: color.$border;
-    background-color: color.$disabled;
-  }
-  
-  td button:not([disabled]):hover {
-    background-color: color.$negative;
-    color: color.$text-light;
-    cursor: pointer;
   }
 }
