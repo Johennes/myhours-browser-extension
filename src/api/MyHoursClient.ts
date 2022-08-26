@@ -154,7 +154,7 @@ export class MyHoursClient {
     return await response.json() as MyHoursLog[];
   }
 
-  async addLog(log: MyHoursLog): Promise<MyHoursLog> {
+  async createLog(log: MyHoursLog): Promise<MyHoursLog> {
     await this.ensureTokens();
 
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/logs/insertlog`, {
@@ -229,6 +229,22 @@ export class MyHoursClient {
     const json = await response.json();
 
     return json.length > 0 ? (json[0]["incompletedTasks"] as MyHoursTask[]) ?? [] : [];
+  }
+
+  async createTask(task: MyHoursTask, projectId: number): Promise<MyHoursTask> {
+    await this.ensureTokens();
+
+    const response = await fetch(`${MY_HOURS_API_BASE_URL}/projects/${projectId}/task`, {
+      method: 'POST',
+      headers: this.headers,
+      body: JSON.stringify({listName: "Task list", ...task})
+    });
+
+    if (response.status !== 200) {
+      throw new Error(`Request failed with HTTP ${response.status}`);
+    }
+
+    return await response.json() as MyHoursTask;
   }
 
 }

@@ -32,18 +32,21 @@ export type Completion = {
 interface IProps {
   initialValue: string;
   fetchCompletions: () => Promise<Completion[]>;
-  complete: (completion: Completion) => void;
+  complete: (completion: Completion | string) => void;
+  createOnEnter: boolean;
   inputProps: Omit<InputHTMLAttributes<HTMLInputElement>, "className" | "type" | "value">;
 };
 
 export const AutocompletingInput: React.FC<IProps> = (props) => {
+  const [isEmpty, setIsEmpty] = useState(!props.initialValue.length);
+  const [showPopup, setShowPopup] = useState(false);
   const [completions, setCompletions] = useState<Completion[]>([]);
   const [filtered, setFiltered] = useState<Completion[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   const showError = !!error;
   const showCompletions = filtered.length > 0;
-  const showPopup = showError || showCompletions;
+  const showCreationNote = props.createOnEnter && !isEmpty && !showError && !showCompletions;
 
   const ref = createRef<HTMLDivElement>();
 
@@ -51,6 +54,7 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
     setCompletions([]);
     setFiltered([]);
     setError(null);
+    setShowPopup(false);
   };
 
   useEffect(() => {
@@ -68,12 +72,16 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
       const completions = await props.fetchCompletions();
       setCompletions(completions);
       setFiltered(completions);
+      setShowPopup(true);
     } catch (e) {
       setError(`Failed to fetch completions: ${e}`);
     }
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.currentTarget.value.trim();
+    setIsEmpty(!value.length);
+
     const words = event.currentTarget.value.split(/\s+/).filter(word => word.length > 0).map(word => word.toLowerCase());
 
     setFiltered(completions.filter(completion => {
@@ -89,6 +97,14 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
     }));
   };
 
+  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key !== "Enter" || isEmpty) {
+      return;
+    }
+    props.complete(event.currentTarget.value.trim());
+    resetCompletions();
+  }
+
   const onClick = (event: React.MouseEvent, completion: Completion) => {
     resetCompletions();
     props.complete(completion);
@@ -101,19 +117,21 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
         inputProps={{
           ...props.inputProps,
           onFocus: onFocus,
-          onChange: onChange
+          onChange: onChange,
+          onKeyDown: onKeyDown
         }}/>
       {showPopup && <div className="AutocompletingInput_popup_container">
         <div className="AutocompletingInput_popup">
           {showCompletions && filtered.map((completion) =>
             <div
-              className="AutocompletingInput_completion"
+              className="AutocompletingInput_item AutocompletingInput_completion"
               key={completion.id}
               onClick={e => onClick(e, completion)}
             >
               {completion.title}
             </div>)}
-          {showError && <ErrorLabel message={error}/>}
+          {showCreationNote && <div className="AutocompletingInput_item">None found. Press <b>Enter</b> to create.</div>}
+          {showError && <ErrorLabel className="AutocompletingInput_item" message={error}/>}
         </div>
       </div>}
     </div>

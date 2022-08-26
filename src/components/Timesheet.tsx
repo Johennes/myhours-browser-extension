@@ -103,6 +103,22 @@ export const Timesheet: React.FC<IProps> = (props) => {
   }
 
   const onChangeLog = async (idx: number, project?: MyHoursProject, task?: MyHoursTask, duration?: number) => {
+    const currentProjectId = logs[idx].projectId;
+
+    if (currentProjectId && task && !task.id) {
+      let newTask: MyHoursTask;
+
+      try {
+        const client = await getClient();
+        newTask = await client.createTask(task, currentProjectId);
+      } catch (e) {
+        setError(`Failed to create task: ${e}`);
+        return;
+      }
+
+      task.id = newTask.id;
+    }
+
     const log = updateLog(idx, project, task, duration);
     const newLogs = [...(logs.slice(0, idx)), log, ...(logs.slice(idx + 1, logs.length - 1))];
 
@@ -118,7 +134,7 @@ export const Timesheet: React.FC<IProps> = (props) => {
     if (needsInsert) {
       try {
         const client = await getClient();
-        await client.addLog(log);
+        await client.createLog(log);
       } catch (e) {
         setError(`Failed to add log: ${e}`);
         return;

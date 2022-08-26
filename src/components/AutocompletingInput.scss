@@ -38,22 +38,18 @@
     box-shadow: 0 0 0.5em color.$border;
     font-size: 80%;
 
-    .AutocompletingInput_completion + .AutocompletingInput_completion {
-      border-top: 1px solid color.$border;
+    .AutocompletingInput_item {
+      padding: 0.3em;
     }
 
-    .AutocompletingInput_completion {
-      padding: 0.3em;
+    .AutocompletingInput_completion + .AutocompletingInput_completion {
+      border-top: 1px solid color.$border;
     }
 
     .AutocompletingInput_completion:hover {
       cursor: pointer;
       background-color: color.$action;
       color: color.$text-light;
-    }
-
-    .ErrorLabel {
-      margin-top: 1em;
     }
   }
 }

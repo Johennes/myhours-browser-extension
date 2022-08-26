@@ -63,6 +63,18 @@ export const TimesheetTable: React.FC<IProps> = (props) => {
     });
   };
 
+  const changeProject = (idx: number, completion: Completion | string) => {
+    if (typeof completion === 'string') {
+      return; // TODO: Support project creation from string
+    }
+    props.onChangeLogProject(idx, completion.completion as MyHoursProject);
+  };
+
+  const changeTask = (idx: number, completion: Completion | string) => {
+    const task = (typeof completion === 'string' ? { name: completion } : completion.completion) as MyHoursTask;
+    props.onChangeLogTask(idx, task);
+  };
+
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>, idx: number) => {
     if (event.key !== "Enter") {
       return;
@@ -91,7 +103,8 @@ export const TimesheetTable: React.FC<IProps> = (props) => {
             <AutocompletingInput
               initialValue={projectInputs[idx]}
               fetchCompletions={fetchProjects}
-              complete={completion => props.onChangeLogProject(idx, completion.completion as MyHoursProject)}
+              complete={completion => changeProject(idx, completion)}
+              createOnEnter={false}
               inputProps={{
                 placeholder: "Select project..."
               }}/>
@@ -100,7 +113,8 @@ export const TimesheetTable: React.FC<IProps> = (props) => {
             <AutocompletingInput
               initialValue={taskInputs[idx]}
               fetchCompletions={() => { return fetchTasks(props.logs[idx].projectId) }}
-              complete={completion => props.onChangeLogTask(idx, completion.completion as MyHoursTask)}
+              complete={completion => changeTask(idx, completion)}
+              createOnEnter={true}
               inputProps={{
                 placeholder: "Select task...",
                 disabled: !log.projectId
