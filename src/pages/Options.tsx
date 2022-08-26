@@ -24,7 +24,11 @@ import "./Options.scss"
 const Options: React.FC = () => {
   return (
     <div className="Options">
-      <i>Nothing to see here yet, sorry</i>
+      This add-on is <b>open source</b>. You may browse the source code or report issues and
+      feature requests on <a href="https://github.com/Johennes/myhours-browser-extension">GitHub</a>.
+      Keep in mind that this project is community-maintained and not affiliated
+      with <a href="https://myhours.com/">My Hours</a> in any way. Use it at your own risk
+      and don't expect professional support.
     </div>
   );
 };
