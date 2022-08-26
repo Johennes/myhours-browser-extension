@@ -16,14 +16,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-import fetch from 'cross-fetch';
+import fetch from "cross-fetch";
 
 import { IMyHoursStorage } from "./storage/IMyHoursStorage";
 import { MyHoursTask } from "./structures/MyHoursTask";
 import { MyHoursProject } from "./structures/MyHoursProject";
 import { MyHoursLog } from "./structures/MyHoursLog";
 import { MyHoursTokens } from "./structures/MyHoursTokens";
-import { isoDateString } from '../utils/datetime';
+import { isoDateString } from "../utils/datetime";
 
 const MY_HOURS_API_BASE_URL = "https://api2.myhours.com/api";
 
@@ -37,8 +37,8 @@ export class MyHoursClient {
 
   private get headers(): HeadersInit {
     const headers: HeadersInit = {
-      'api-version': '1.0',
-      'Content-Type': 'application/json',
+      "api-version": "1.0",
+      "Content-Type": "application/json",
     };
 
     if (this.storage.accessToken) {
@@ -52,12 +52,12 @@ export class MyHoursClient {
     const body = {
       email,
       password,
-      grantType: 'password',
-      clientId: 'api',
+      grantType: "password",
+      clientId: "api",
     };
 
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/tokens/login`, {
-      method: 'POST',
+      method: "POST",
       headers: this.headers,
       body: JSON.stringify(body)
     });
@@ -88,9 +88,9 @@ export class MyHoursClient {
     }
     
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/tokens/refresh`, {
-      method: 'POST',
+      method: "POST",
       headers: this.headers,
-      body: JSON.stringify({ refreshToken: this.storage.refreshToken, grantType: 'refresh_token' })
+      body: JSON.stringify({ refreshToken: this.storage.refreshToken, grantType: "refresh_token" })
     });
 
     if (response.status !== 200) {
@@ -112,7 +112,7 @@ export class MyHoursClient {
     await this.ensureTokens();
 
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/tokens/logout`, {
-      method: 'POST',
+      method: "POST",
       headers: this.headers
     });
 
@@ -158,7 +158,7 @@ export class MyHoursClient {
     await this.ensureTokens();
 
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/logs/insertlog`, {
-      method: 'POST',
+      method: "POST",
       headers: this.headers,
       body: JSON.stringify(log)
     });
@@ -174,7 +174,7 @@ export class MyHoursClient {
     await this.ensureTokens();
 
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/logs?id=${log.id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: this.headers,
       body: JSON.stringify(log),
     });
@@ -190,7 +190,7 @@ export class MyHoursClient {
     await this.ensureTokens();
 
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/Logs/${logId}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: this.headers
     });
 
@@ -203,7 +203,7 @@ export class MyHoursClient {
     await this.ensureTokens();
 
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/Projects`, {
-      method: 'GET',
+      method: "GET",
       headers: this.headers
     });
 
@@ -218,7 +218,7 @@ export class MyHoursClient {
     await this.ensureTokens();
 
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/Projects/${projectId}/tasklist`, {
-      method: 'GET',
+      method: "GET",
       headers: this.headers
     });
 
@@ -235,7 +235,7 @@ export class MyHoursClient {
     await this.ensureTokens();
 
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/projects/${projectId}/task`, {
-      method: 'POST',
+      method: "POST",
       headers: this.headers,
       body: JSON.stringify({listName: "Task list", ...task})
     });

@@ -16,11 +16,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { Button, ButtonType } from './Button';
-import { ErrorLabel } from './ErrorLabel';
-import { Loader } from './Loader';
+import { Button, ButtonType } from "./Button";
+import { ErrorLabel } from "./ErrorLabel";
+import { Loader } from "./Loader";
 
 import "./LoginForm.scss";
 

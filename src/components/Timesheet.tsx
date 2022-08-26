@@ -16,17 +16,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 import { MyHoursTask } from "../api/structures/MyHoursTask";
 import { MyHoursProject } from "../api/structures/MyHoursProject";
 import { MyHoursLog } from "../api/structures/MyHoursLog";
-import { getClient } from '../utils/globals';
-import { isoDateString, utcMidnight } from '../utils/datetime';
-import { ErrorLabel } from './ErrorLabel';
-import { Loader } from './Loader';
-import { TimesheetHeader } from './TimesheetHeader';
-import { TimesheetTable } from './TimesheetTable';
+import { getClient } from "../utils/globals";
+import { isoDateString, utcMidnight } from "../utils/datetime";
+import { ErrorLabel } from "./ErrorLabel";
+import { Loader } from "./Loader";
+import { TimesheetHeader } from "./TimesheetHeader";
+import { TimesheetTable } from "./TimesheetTable";
 
 import "./Timesheet.scss";
 

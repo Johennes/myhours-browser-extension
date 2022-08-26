@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
 import "./Options.scss"
 
@@ -28,9 +28,9 @@ const Options: React.FC = () => {
       feature requests on <a href="https://github.com/Johennes/myhours-browser-extension">GitHub</a>.
       Keep in mind that this project is community-maintained and not affiliated
       with <a href="https://myhours.com/">My Hours</a> in any way. Use it at your own risk
-      and don't expect professional support.
+      and don"t expect professional support.
     </div>
   );
 };
 
-ReactDOM.render(<Options/>, document.getElementById('root'));
+ReactDOM.render(<Options/>, document.getElementById("root"));

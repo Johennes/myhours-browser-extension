@@ -16,13 +16,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 
-import { LoginForm, LoginFormState } from '../components/LoginForm';
-import { Timesheet } from '../components/Timesheet';
-import { Footer } from '../components/Footer';
-import { getClient } from '../utils/globals';
+import { LoginForm, LoginFormState } from "../components/LoginForm";
+import { Timesheet } from "../components/Timesheet";
+import { Footer } from "../components/Footer";
+import { getClient } from "../utils/globals";
 
 import "./Popup.scss"
 
@@ -63,4 +63,4 @@ const Popup: React.FC = () => {
   );
 };
 
-ReactDOM.render(<Popup/>, document.getElementById('root'));
+ReactDOM.render(<Popup/>, document.getElementById("root"));

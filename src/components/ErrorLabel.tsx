@@ -16,9 +16,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-import React from 'react';
+import React from "react";
 
-import { combineClassNames } from '../utils/misc';
+import { combineClassNames } from "../utils/misc";
 
 import "./ErrorLabel.scss";
 

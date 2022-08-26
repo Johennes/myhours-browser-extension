@@ -16,17 +16,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-import React from 'react';
+import React from "react";
 
 import { MyHoursTask } from "../api/structures/MyHoursTask";
 import { MyHoursProject } from "../api/structures/MyHoursProject";
 import { MyHoursLog } from "../api/structures/MyHoursLog";
-import { formatDuration, parseDuration } from '../utils/datetime';
-import { getClient } from '../utils/globals';
-import { combineClassNames } from '../utils/misc';
-import { AutocompletingInput, Completion } from './AutocompletingInput';
-import { ManagedInput } from './ManagedInput';
-import { Button, ButtonType } from './Button';
+import { formatDuration, parseDuration } from "../utils/datetime";
+import { getClient } from "../utils/globals";
+import { combineClassNames } from "../utils/misc";
+import { AutocompletingInput, Completion } from "./AutocompletingInput";
+import { ManagedInput } from "./ManagedInput";
+import { Button, ButtonType } from "./Button";
 
 import "./TimesheetTable.scss";
 
@@ -64,14 +64,14 @@ export const TimesheetTable: React.FC<IProps> = (props) => {
   };
 
   const changeProject = (idx: number, completion: Completion | string) => {
-    if (typeof completion === 'string') {
+    if (typeof completion === "string") {
       return; // TODO: Support project creation from string
     }
     props.onChangeLogProject(idx, completion.completion as MyHoursProject);
   };
 
   const changeTask = (idx: number, completion: Completion | string) => {
-    const task = (typeof completion === 'string' ? { name: completion } : completion.completion) as MyHoursTask;
+    const task = (typeof completion === "string" ? { name: completion } : completion.completion) as MyHoursTask;
     props.onChangeLogTask(idx, task);
   };
 

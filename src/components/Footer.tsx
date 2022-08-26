@@ -16,10 +16,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-import React from 'react';
-import * as browser from 'webextension-polyfill';
+import React from "react";
+import * as browser from "webextension-polyfill";
 
-import { Button, ButtonType } from './Button';
+import { Button, ButtonType } from "./Button";
 
 import "./Footer.scss";
 

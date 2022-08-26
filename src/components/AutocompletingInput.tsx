@@ -16,10 +16,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-import React, { createRef, InputHTMLAttributes, useEffect, useState } from 'react';
+import React, { createRef, InputHTMLAttributes, useEffect, useState } from "react";
 
-import { ErrorLabel } from './ErrorLabel';
-import { ManagedInput } from './ManagedInput';
+import { ErrorLabel } from "./ErrorLabel";
+import { ManagedInput } from "./ManagedInput";
 
 import "./AutocompletingInput.scss";
 

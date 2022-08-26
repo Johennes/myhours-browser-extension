@@ -16,9 +16,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-import * as browser from 'webextension-polyfill';
+import * as browser from "webextension-polyfill";
 
-import { IMyHoursStorage } from './IMyHoursStorage';
+import { IMyHoursStorage } from "./IMyHoursStorage";
 
 export class MyHoursWebExtensionStorage implements IMyHoursStorage {
 
