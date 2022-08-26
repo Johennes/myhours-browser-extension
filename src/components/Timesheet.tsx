@@ -120,7 +120,7 @@ export const Timesheet: React.FC<IProps> = (props) => {
     }
 
     const log = updateLog(idx, project, task, duration);
-    const newLogs = [...(logs.slice(0, idx)), log, ...(logs.slice(idx + 1, logs.length - 1))];
+    const newLogs = [...(logs.slice(0, idx)), log, ...(logs.slice(idx + 1, logs.length))];
 
     const needsInsert = !log.id && log.projectId && log.duration;
     const needsUpdate = !!log.id;
