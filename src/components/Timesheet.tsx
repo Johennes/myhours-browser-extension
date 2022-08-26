@@ -71,7 +71,7 @@ export const Timesheet: React.FC<IProps> = (props) => {
 
   const onDateChanged = (newDate: Date) => {
     setDate(newDate);
-    setLogs([{ date: isoDateString(date) } as MyHoursLog]);
+    setLogs([{ date: isoDateString(newDate) } as MyHoursLog]);
     setNeedsReload(true);
     setError(null);
   };
@@ -96,7 +96,7 @@ export const Timesheet: React.FC<IProps> = (props) => {
     }
 
     if (duration !== undefined) {
-      log.duration = duration
+      log.duration = duration;
     }
 
     return log;
