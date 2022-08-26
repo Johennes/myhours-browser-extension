@@ -131,7 +131,7 @@ export const TimesheetTable: React.FC<IProps> = (props) => {
           </td>
           <td>
             <Button
-              type={ButtonType.Default}
+              type={ButtonType.Destructive}
               title="del"
               disabled={!log.id}
               onClick={_ => props.onDeleteLog(idx)}/>
