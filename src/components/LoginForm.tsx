@@ -31,8 +31,8 @@ export enum LoginFormState {
 }
 
 interface IProps {
-  email?: string;
-  state: LoginFormState;
+  email?: string
+  state: LoginFormState
   onSubmit: (email: string, password: string) => void
 };
 

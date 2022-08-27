@@ -17,9 +17,9 @@
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 export interface MyHoursTime {
-  duration?: number;
-  endTime?: string;
-  id?: number;
-  running?: boolean;
-  startTime?: string;
+  duration?: number
+  endTime?: string
+  id?: number
+  running?: boolean
+  startTime?: string
 }

@@ -10,11 +10,17 @@
   ],
   "overrides": [],
   "parserOptions": {
+    "project": ["./tsconfig.json"],
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "plugins": [
     "react"
   ],
-  "rules": {}
+  "rules": {
+    "@typescript-eslint/semi": ["error", "always"],
+    "@typescript-eslint/quotes": ["error", "double"],
+    "@typescript-eslint/space-before-function-paren": ["off"],
+    "@typescript-eslint/array-type": ["error", { "default": "array" }]
+  }
 }

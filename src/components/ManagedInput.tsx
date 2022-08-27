@@ -21,13 +21,13 @@ import React, { InputHTMLAttributes, useEffect, useState } from "react";
 import "./ManagedInput.scss";
 
 interface IProps {
-  initialValue: string;
-  inputProps: Omit<InputHTMLAttributes<HTMLInputElement>, "className" | "type" | "value">;
+  initialValue: string
+  inputProps: Omit<InputHTMLAttributes<HTMLInputElement>, "className" | "type" | "value">
 };
 
 export const ManagedInput: React.FC<IProps> = (props) => {
   const [value, setValue] = useState(props.initialValue);
-  
+
   useEffect(() => {
     setValue(props.initialValue);
   }, [props.initialValue]);

@@ -24,7 +24,7 @@ import { Timesheet } from "../components/Timesheet";
 import { Footer } from "../components/Footer";
 import { getClient } from "../utils/globals";
 
-import "./Popup.scss"
+import "./Popup.scss";
 
 const Popup: React.FC = () => {
   const [loginFormState, setLoginFormState] = useState(LoginFormState.Initial);

@@ -16,8 +16,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-export type MyHoursTokens = {
-  accessToken: string;
-  refreshToken: string;
-  expiresIn: number;
-};
+export interface MyHoursTokens {
+  accessToken: string
+  refreshToken: string
+  expiresIn: number
+}

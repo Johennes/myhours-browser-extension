@@ -17,11 +17,11 @@
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 export interface IMyHoursStorage {
-  email?: string;
-  accessToken?: string;
-  refreshToken?: string;
-  expiresAt?: number;
-  
-  load(): Promise<void>;
-  save(): Promise<void>;
+  email?: string
+  accessToken?: string
+  refreshToken?: string
+  expiresAt?: number
+
+  load: () => Promise<void>
+  save: () => Promise<void>
 }

@@ -17,9 +17,9 @@
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 export interface MyHoursTag {
-  archived?: boolean;
-  dateArchived?: string;
-  hexColor?: string;
-  id?: number;
-  name?: string;
+  archived?: boolean
+  dateArchived?: string
+  hexColor?: string
+  id?: number
+  name?: string
 }

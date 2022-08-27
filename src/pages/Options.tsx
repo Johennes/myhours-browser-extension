@@ -19,7 +19,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import "./Options.scss"
+import "./Options.scss";
 
 const Options: React.FC = () => {
   return (

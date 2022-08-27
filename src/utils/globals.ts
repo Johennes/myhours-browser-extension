@@ -23,7 +23,7 @@ import { MyHoursWebExtensionStorage } from "../api/storage/MyHoursWebExtensionSt
 let storage: IMyHoursStorage | null = null;
 
 export async function getStorage(): Promise<IMyHoursStorage> {
-  if (!storage) {
+  if (storage == null) {
     storage = new MyHoursWebExtensionStorage();
     await storage.load();
   }
@@ -33,7 +33,7 @@ export async function getStorage(): Promise<IMyHoursStorage> {
 let client: MyHoursClient | null = null;
 
 export async function getClient(): Promise<MyHoursClient> {
-  if (!client) {
+  if (client == null) {
     client = new MyHoursClient(await getStorage());
   }
   return client;

@@ -24,8 +24,8 @@ import { Button, ButtonType } from "./Button";
 import "./Footer.scss";
 
 interface IProps {
-  isLoggedIn: boolean;
-  onLogOut: () => void;
+  isLoggedIn: boolean
+  onLogOut: () => void
 };
 
 export const Footer: React.FC<IProps> = (props) => {

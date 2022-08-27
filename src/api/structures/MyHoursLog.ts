@@ -20,16 +20,16 @@ import { MyHoursTime } from "api/structures/MyHoursTime";
 import { MyHoursTag } from "./MyHoursTag";
 
 export interface MyHoursLog {
-  clientName?: string;
-  date?: string;
-  duration?: number;
-  id?: number;
-  note?: string;
-  projectId?: number;
-  projectName?: string;
-  running?: boolean;
-  tags?: MyHoursTag[];
-  taskId?: number;
-  taskName?: string;
-  times?: MyHoursTime[];
+  clientName?: string
+  date?: string
+  duration?: number
+  id?: number
+  note?: string
+  projectId?: number
+  projectName?: string
+  running?: boolean
+  tags?: MyHoursTag[]
+  taskId?: number
+  taskName?: string
+  times?: MyHoursTime[]
 }

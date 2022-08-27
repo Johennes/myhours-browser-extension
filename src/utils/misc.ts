@@ -17,5 +17,5 @@
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 export function combineClassNames(...names: (string | null | undefined)[]): string {
-  return names.filter(name => !!name).join(" ") 
+  return names.filter(name => !!name).join(" ");
 }

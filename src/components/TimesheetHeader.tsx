@@ -23,8 +23,8 @@ import { formatDateWithWeekday, nextDay, previousDay } from "../utils/datetime";
 import "./TimesheetHeader.scss";
 
 interface IProps {
-  date: Date;
-  onDateChanged: (newDate: Date) => void;
+  date: Date
+  onDateChanged: (newDate: Date) => void
 };
 
 export const TimesheetHeader: React.FC<IProps> = (props) => {

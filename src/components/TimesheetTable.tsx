@@ -31,12 +31,12 @@ import { Button, ButtonType } from "./Button";
 import "./TimesheetTable.scss";
 
 interface IProps {
-  className?: string;
-  logs: MyHoursLog[];
-  onChangeLogProject: (idx: number, project: MyHoursProject) => void;
-  onChangeLogTask: (idx: number, task: MyHoursTask) => void;
-  onChangeLogDuration: (idx: number, duration: number) => void;
-  onDeleteLog: (idx: number) => void;
+  className?: string
+  logs: MyHoursLog[]
+  onChangeLogProject: (idx: number, project: MyHoursProject) => void
+  onChangeLogTask: (idx: number, task: MyHoursTask) => void
+  onChangeLogDuration: (idx: number, duration: number) => void
+  onDeleteLog: (idx: number) => void
 };
 
 export const TimesheetTable: React.FC<IProps> = (props) => {
@@ -112,7 +112,7 @@ export const TimesheetTable: React.FC<IProps> = (props) => {
           <td>
             <AutocompletingInput
               initialValue={taskInputs[idx]}
-              fetchCompletions={() => { return fetchTasks(props.logs[idx].projectId) }}
+              fetchCompletions={async () => { return await fetchTasks(props.logs[idx].projectId); }}
               complete={completion => changeTask(idx, completion)}
               createOnEnter={true}
               inputProps={{

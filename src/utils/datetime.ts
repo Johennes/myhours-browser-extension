@@ -17,7 +17,7 @@
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 export function utcMidnight(date: Date): Date {
-  return new Date(date.setUTCHours(0, 0, 0, 0))
+  return new Date(date.setUTCHours(0, 0, 0, 0));
 }
 
 export function formatDateWithWeekday(date: Date): string {
@@ -39,13 +39,13 @@ export function nextDay(date: Date): Date {
 }
 
 export function isoDateString(date: Date): string {
-  return date.toISOString().substring(0, 10)
+  return date.toISOString().substring(0, 10);
 }
 
 export function formatDuration(totalSeconds: number): string {
-  let hours = Math.floor(totalSeconds / 3600);
+  const hours = Math.floor(totalSeconds / 3600);
   let minutes = Math.floor((totalSeconds - (hours * 3600)) / 60);
-  let seconds = totalSeconds - (hours * 3600) - (minutes * 60);
+  const seconds = totalSeconds - (hours * 3600) - (minutes * 60);
 
   if (seconds >= 30) {
     minutes += 1;
@@ -58,13 +58,13 @@ export function formatDuration(totalSeconds: number): string {
   return [format(hours), format(minutes)].join(":");
 }
 
-export function parseDuration(duration: string): number|null {
+export function parseDuration(duration: string): number | null {
   if (!duration.trim().length) {
     return 0;
   }
 
   const components = duration.split(":").map(c => parseInt(c.trim()));
-  if (components.length > 2 || components.indexOf(NaN) >= 0) {
+  if (components.length > 2 || components.includes(NaN)) {
     return null;
   }
 

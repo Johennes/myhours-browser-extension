@@ -28,7 +28,6 @@ import { isoDateString } from "../utils/datetime";
 const MY_HOURS_API_BASE_URL = "https://api2.myhours.com/api";
 
 export class MyHoursClient {
-
   private storage: IMyHoursStorage;
 
   constructor(storage: IMyHoursStorage) {
@@ -38,11 +37,11 @@ export class MyHoursClient {
   private get headers(): HeadersInit {
     const headers: HeadersInit = {
       "api-version": "1.0",
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     };
 
     if (this.storage.accessToken) {
-      headers["Authorization"] = `Bearer ${this.storage.accessToken}`;
+      headers.Authorization = `Bearer ${this.storage.accessToken}`;
     }
 
     return headers;
@@ -53,7 +52,7 @@ export class MyHoursClient {
       email,
       password,
       grantType: "password",
-      clientId: "api",
+      clientId: "api"
     };
 
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/tokens/login`, {
@@ -67,7 +66,7 @@ export class MyHoursClient {
     }
 
     const tokens = await response.json() as MyHoursTokens;
-  
+
     this.storage.email = email;
     this.storage.accessToken = tokens.accessToken;
     this.storage.refreshToken = tokens.refreshToken;
@@ -79,14 +78,14 @@ export class MyHoursClient {
   }
 
   get isLoggedIn(): boolean {
-    return !!this.storage.accessToken
+    return !!this.storage.accessToken;
   }
 
   async refreshTokens(): Promise<MyHoursTokens> {
     if (!this.storage.refreshToken) {
       throw Error("Cannot refresh access token without a refresh token");
     }
-    
+
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/tokens/refresh`, {
       method: "POST",
       headers: this.headers,
@@ -131,7 +130,7 @@ export class MyHoursClient {
     if (!this.storage.accessToken || !this.storage.refreshToken || !this.storage.expiresAt) {
       throw Error("Cannot ensure tokens without existing tokens");
     }
-    
+
     if (Date.now() < this.storage.expiresAt) {
       return;
     }
@@ -166,7 +165,7 @@ export class MyHoursClient {
     if (response.status !== 201) {
       throw new Error(`Request failed with HTTP ${response.status}`);
     }
-    
+
     return await response.json() as MyHoursLog;
   }
 
@@ -176,7 +175,7 @@ export class MyHoursClient {
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/logs?id=${log.id}`, {
       method: "PUT",
       headers: this.headers,
-      body: JSON.stringify(log),
+      body: JSON.stringify(log)
     });
 
     if (response.status !== 200) {
@@ -228,7 +227,7 @@ export class MyHoursClient {
 
     const json = await response.json();
 
-    return json.length > 0 ? (json[0]["incompletedTasks"] as MyHoursTask[]) ?? [] : [];
+    return json.length > 0 ? (json[0].incompletedTasks as MyHoursTask[]) ?? [] : [];
   }
 
   async createTask(task: MyHoursTask, projectId: number): Promise<MyHoursTask> {
@@ -237,7 +236,7 @@ export class MyHoursClient {
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/projects/${projectId}/task`, {
       method: "POST",
       headers: this.headers,
-      body: JSON.stringify({listName: "Task list", ...task})
+      body: JSON.stringify({ listName: "Task list", ...task })
     });
 
     if (response.status !== 200) {
@@ -246,5 +245,4 @@ export class MyHoursClient {
 
     return await response.json() as MyHoursTask;
   }
-
 }

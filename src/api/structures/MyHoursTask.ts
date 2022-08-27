@@ -17,7 +17,7 @@
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 export interface MyHoursTask {
-  description?: string;
-  id?: number;
-  name?: string;
+  description?: string
+  id?: number
+  name?: string
 }

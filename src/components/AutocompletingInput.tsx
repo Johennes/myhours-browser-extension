@@ -23,18 +23,18 @@ import { ManagedInput } from "./ManagedInput";
 
 import "./AutocompletingInput.scss";
 
-export type Completion = {
-  id: number;
-  title: string;
-  completion: any; // TODO: Use generics to avoid type cast
-}
+export interface Completion {
+  id: number
+  title: string
+  completion: any // TODO: Use generics to avoid type cast
+};
 
 interface IProps {
-  initialValue: string;
-  fetchCompletions: () => Promise<Completion[]>;
-  complete: (completion: Completion | string) => void;
-  createOnEnter: boolean;
-  inputProps: Omit<InputHTMLAttributes<HTMLInputElement>, "className" | "type" | "value">;
+  initialValue: string
+  fetchCompletions: () => Promise<Completion[]>
+  complete: (completion: Completion | string) => void
+  createOnEnter: boolean
+  inputProps: Omit<InputHTMLAttributes<HTMLInputElement>, "className" | "type" | "value">
 };
 
 export const AutocompletingInput: React.FC<IProps> = (props) => {
@@ -88,7 +88,7 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
       const lowercased = completion.title.toLowerCase();
 
       for (const word of words) {
-        if (lowercased.indexOf(word) < 0) {
+        if (!lowercased.includes(word)) {
           return false;
         }
       }
@@ -103,7 +103,7 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
     }
     props.complete(event.currentTarget.value.trim());
     resetCompletions();
-  }
+  };
 
   const onClick = (event: React.MouseEvent, completion: Completion) => {
     resetCompletions();
@@ -116,9 +116,9 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
         initialValue={props.initialValue}
         inputProps={{
           ...props.inputProps,
-          onFocus: onFocus,
-          onChange: onChange,
-          onKeyDown: onKeyDown
+          onFocus,
+          onChange,
+          onKeyDown
         }}/>
       {showPopup && <div className="AutocompletingInput_popup_container">
         <div className="AutocompletingInput_popup">

@@ -17,9 +17,9 @@
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 export interface MyHoursProject {
-  archived?: boolean;
-  clientId?: number;
-  clientName?: string;
-  id?: number;
-  name?: string;
+  archived?: boolean
+  clientId?: number
+  clientName?: string
+  id?: number
+  name?: string
 }

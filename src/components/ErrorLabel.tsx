@@ -23,8 +23,8 @@ import { combineClassNames } from "../utils/misc";
 import "./ErrorLabel.scss";
 
 interface IProps {
-  className?: string;
-  message: string;
+  className?: string
+  message: string
 };
 
 export const ErrorLabel: React.FC<IProps> = (props) => {

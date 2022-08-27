@@ -62,8 +62,8 @@ export const Timesheet: React.FC<IProps> = (props) => {
       setNeedsReload(false);
     }
 
-    setIsReloading(false)
-  }
+    setIsReloading(false);
+  };
 
   useEffect(() => {
     reload();
@@ -77,7 +77,7 @@ export const Timesheet: React.FC<IProps> = (props) => {
   };
 
   const updateLog = (idx: number, project?: MyHoursProject, task?: MyHoursTask, duration?: number) => {
-    let log = { ...(logs[idx]) };
+    const log = { ...(logs[idx]) };
 
     if (project !== undefined) {
       if (log.projectId !== project.id) {
@@ -100,12 +100,12 @@ export const Timesheet: React.FC<IProps> = (props) => {
     }
 
     return log;
-  }
+  };
 
   const onChangeLog = async (idx: number, project?: MyHoursProject, task?: MyHoursTask, duration?: number) => {
     const currentProjectId = logs[idx].projectId;
 
-    if (currentProjectId && task && !task.id) {
+    if (currentProjectId && (task != null) && !task.id) {
       let newTask: MyHoursTask;
 
       try {
@@ -151,10 +151,10 @@ export const Timesheet: React.FC<IProps> = (props) => {
         setError(`Failed to edit log: ${e}`);
         return;
       }
-  
+
       setNeedsReload(true);
     }
-  }
+  };
 
   const onDeleteLog = async (idx: number) => {
     const id = logs[idx].id;
@@ -180,9 +180,9 @@ export const Timesheet: React.FC<IProps> = (props) => {
       {!isReloading && !error && <TimesheetTable
         className="table"
         logs={logs}
-        onChangeLogProject={(idx, project) => onChangeLog(idx, project, undefined, undefined)}
-        onChangeLogTask={(idx, task) => onChangeLog(idx, undefined, task, undefined)}
-        onChangeLogDuration={(idx, duration) => onChangeLog(idx, undefined, undefined, duration)}
+        onChangeLogProject={async (idx, project) => await onChangeLog(idx, project, undefined, undefined)}
+        onChangeLogTask={async (idx, task) => await onChangeLog(idx, undefined, task, undefined)}
+        onChangeLogDuration={async (idx, duration) => await onChangeLog(idx, undefined, undefined, duration)}
         onDeleteLog={onDeleteLog}/>}
       {!isReloading && error && <ErrorLabel message={error}/>}
     </div>

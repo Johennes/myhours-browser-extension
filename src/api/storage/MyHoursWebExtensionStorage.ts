@@ -21,7 +21,6 @@ import * as browser from "webextension-polyfill";
 import { IMyHoursStorage } from "./IMyHoursStorage";
 
 export class MyHoursWebExtensionStorage implements IMyHoursStorage {
-
   email?: string;
   accessToken?: string;
   refreshToken?: string;
@@ -29,16 +28,15 @@ export class MyHoursWebExtensionStorage implements IMyHoursStorage {
 
   async load(): Promise<void> {
     const result = await browser.storage.local.get("storage");
-    const storage = (result["storage"] ?? {}) as IMyHoursStorage
+    const storage = (result.storage ?? {}) as IMyHoursStorage;
 
     this.email = storage.email;
     this.accessToken = storage.accessToken;
     this.refreshToken = storage.refreshToken;
     this.expiresAt = storage.expiresAt;
   }
-  
-  async save(): Promise<void> {
-    await browser.storage.local.set({ "storage": this })
-  }
 
+  async save(): Promise<void> {
+    await browser.storage.local.set({ storage: this });
+  }
 }

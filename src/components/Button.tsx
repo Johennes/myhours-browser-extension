@@ -27,10 +27,10 @@ export enum ButtonType {
 }
 
 interface IProps {
-  type: ButtonType;
-  title: string;
-  disabled?: boolean;
-  onClick?: (event: React.MouseEvent) => void;
+  type: ButtonType
+  title: string
+  disabled?: boolean
+  onClick?: (event: React.MouseEvent) => void
 };
 
 export const Button: React.FC<IProps> = (props) => {
