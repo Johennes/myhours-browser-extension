@@ -62,7 +62,7 @@ export class MyHoursClient {
     });
 
     if (response.status !== 200) {
-      throw new Error(`Request failed with HTTP ${response.status}`);
+      throw new Error(await this.extractErrorMessage(response));
     }
 
     const tokens = await response.json() as MyHoursTokens;
@@ -93,7 +93,7 @@ export class MyHoursClient {
     });
 
     if (response.status !== 200) {
-      throw new Error(`Request failed with HTTP ${response.status}`);
+      throw new Error(await this.extractErrorMessage(response));
     }
 
     const tokens = await response.json() as MyHoursTokens;
@@ -116,7 +116,7 @@ export class MyHoursClient {
     });
 
     if (response.status !== 200) {
-      throw new Error(`Request failed with HTTP ${response.status}`);
+      throw new Error(await this.extractErrorMessage(response));
     }
 
     delete this.storage.accessToken;
@@ -147,7 +147,7 @@ export class MyHoursClient {
     });
 
     if (response.status !== 200) {
-      throw new Error(`Request failed with HTTP ${response.status}`);
+      throw new Error(await this.extractErrorMessage(response));
     }
 
     return await response.json() as MyHoursLog[];
@@ -159,11 +159,11 @@ export class MyHoursClient {
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/logs/insertlog`, {
       method: "POST",
       headers: this.headers,
-      body: JSON.stringify(log)
+      body: JSON.stringify({ billable: false, ...log }) // TODO: Support billing
     });
 
     if (response.status !== 201) {
-      throw new Error(`Request failed with HTTP ${response.status}`);
+      throw new Error(await this.extractErrorMessage(response));
     }
 
     return await response.json() as MyHoursLog;
@@ -179,7 +179,7 @@ export class MyHoursClient {
     });
 
     if (response.status !== 200) {
-      throw new Error(`Request failed with HTTP ${response.status}`);
+      throw new Error(await this.extractErrorMessage(response));
     }
 
     return await response.json() as MyHoursLog;
@@ -194,7 +194,7 @@ export class MyHoursClient {
     });
 
     if (response.status !== 200) {
-      throw new Error(`Request failed with HTTP ${response.status}`);
+      throw new Error(await this.extractErrorMessage(response));
     }
   }
 
@@ -207,7 +207,7 @@ export class MyHoursClient {
     });
 
     if (response.status !== 200) {
-      throw new Error(`Request failed with HTTP ${response.status}`);
+      throw new Error(await this.extractErrorMessage(response));
     }
 
     return await response.json() as MyHoursProject[];
@@ -222,7 +222,7 @@ export class MyHoursClient {
     });
 
     if (response.status !== 200) {
-      throw new Error(`Request failed with HTTP ${response.status}`);
+      throw new Error(await this.extractErrorMessage(response));
     }
 
     const json = await response.json();
@@ -236,13 +236,34 @@ export class MyHoursClient {
     const response = await fetch(`${MY_HOURS_API_BASE_URL}/projects/${projectId}/task`, {
       method: "POST",
       headers: this.headers,
-      body: JSON.stringify({ listName: "Task list", ...task })
+      body: JSON.stringify({ listName: "Task list", billable: false, ...task }) // TODO: Support billing
     });
 
     if (response.status !== 200) {
-      throw new Error(`Request failed with HTTP ${response.status}`);
+      throw new Error(await this.extractErrorMessage(response));
     }
 
     return await response.json() as MyHoursTask;
+  }
+
+  private async extractErrorMessage(response: Response): Promise<string> {
+    let result = `Request failed with HTTP ${response.status}`;
+    let json;
+
+    try {
+      json = await response.json();
+    } catch (_) {
+      return result;
+    }
+
+    if (!json.message) {
+      return result;
+    }
+
+    const validationErrors = json.validationErrors as string[];
+    const details = (validationErrors.length > 0) ? `${json.message} (${validationErrors.join(", ")})` : json.message;
+    result = `${result} - ${details}`;
+
+    return result;
   }
 }
