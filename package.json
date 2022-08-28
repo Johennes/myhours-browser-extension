@@ -15,11 +15,12 @@
   },
   "scripts": {
     "lint": "yarn run eslint src",
-    "watchdev": "parcel watch manifest.json --target dev",
+    "watchdev": "cp manifest-v2.json manifest.json && parcel watch manifest.json --target dev",
     "servedev": "web-ext run -s dist/dev/",
-    "watchprod": "parcel watch manifest.json --target prod",
+    "watchprod": "cp manifest-v2.json manifest.json && parcel watch manifest.json --target prod",
     "serveprod": "web-ext run -s dist/prod/",
-    "build": "parcel build manifest.json --target prod && web-ext build -s dist/prod/"
+    "build-v2": "cp manifest-v2.json manifest.json && parcel build manifest.json --target prod && web-ext build --overwrite-dest -s dist/prod/ -a dist/artifacts",
+    "build-v3": "cp manifest-v3.json manifest.json && parcel build manifest.json --target prod && cd dist/prod && zip -r ../artifacts/myhours-${npm_package_version}.zip *"
   },
   "dependencies": {
     "@types/node": "^18.7.6",

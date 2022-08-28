@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "myhours",
   "description": "Track your time on myhours.com",
   "version": "0.1.0",
@@ -7,7 +7,7 @@
     "48": "assets/icon.svg",
     "96": "assets/icon.svg"
   },
-  "browser_action": {
+  "action": {
     "browser_style": true,
     "default_icon": "assets/icon.svg",
     "default_title": "Track time on myhours",
@@ -17,7 +17,9 @@
     "page": "src/static/Options.html"
   },
   "permissions": [
-    "*://api2.myhours.com/api/*",
     "storage"
+  ],
+  "host_permissions": [
+    "*://api2.myhours.com/api/*"
   ]
 }

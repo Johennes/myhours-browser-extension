@@ -16,6 +16,10 @@ yarn servedev
 
 Any changes made in the source should now automatically be reflected in the running browser.
 
+## Distribution
+
+To build the add-on for distribution using manifest v2 (Firefox) or v3 (Chrome) run `yarn build-v2` or `yarn build-v3`, respectively. In both cases the resulting archive will be placed into the `dist/artifacts/` directory.
+
 ## License & attributions
 
 myhours-browser-extension is licensed under the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
