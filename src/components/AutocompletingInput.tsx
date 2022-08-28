@@ -67,24 +67,16 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
     return () => document.removeEventListener("click", onClick);
   });
 
-  const onFocus = async (event: React.FocusEvent<HTMLInputElement>) => {
-    try {
-      const completions = await props.fetchCompletions();
-      setCompletions(completions);
-      setFiltered(completions);
-      setShowPopup(true);
-    } catch (e) {
-      setError(`Failed to fetch completions: ${e}`);
+  const filterCompletions = (completions: Completion[], input: string) => {
+    const value = input.trim();
+
+    if (!value.length) {
+      return completions;
     }
-  };
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.currentTarget.value.trim();
-    setIsEmpty(!value.length);
+    const words = value.split(/\s+/).filter(word => word.length > 0).map(word => word.toLowerCase());
 
-    const words = event.currentTarget.value.split(/\s+/).filter(word => word.length > 0).map(word => word.toLowerCase());
-
-    setFiltered(completions.filter(completion => {
+    return completions.filter(completion => {
       const lowercased = completion.title.toLowerCase();
 
       for (const word of words) {
@@ -94,7 +86,27 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
       }
 
       return true;
-    }));
+    });
+  };
+
+  const onFocus = async (event: React.FocusEvent<HTMLInputElement>) => {
+    try {
+      const completions = await props.fetchCompletions();
+      setCompletions(completions);
+      const filtered = filterCompletions(completions, event.target.value);
+      setFiltered(filtered);
+      setShowPopup(filtered.length > 0);
+    } catch (e) {
+      setError(`Failed to fetch completions: ${e}`);
+      setShowPopup(true);
+    }
+  };
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsEmpty(!event.target.value.length);
+    const filtered = filterCompletions(completions, event.target.value);
+    setFiltered(filtered);
+    setShowPopup(filtered.length > 0);
   };
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
