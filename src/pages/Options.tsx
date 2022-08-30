@@ -28,7 +28,7 @@ const Options: React.FC = () => {
       feature requests on <a href="https://github.com/Johennes/myhours-browser-extension">GitHub</a>.
       Keep in mind that this project is community-maintained and not affiliated
       with <a href="https://myhours.com/">My Hours</a> in any way. Use it at your own risk
-      and don"t expect professional support.
+      and don&apos;t expect professional support.
     </div>
   );
 };

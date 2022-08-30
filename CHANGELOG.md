@@ -1,3 +1,7 @@
+# Unreleased
+
+- Fix quote typo in options page
+
 # 0.1.2 (2022-08-30)
 
 - Switch action icon to PNG for compatibility with Chrome
