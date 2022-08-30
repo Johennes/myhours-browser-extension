@@ -19,8 +19,8 @@
     "servedev": "web-ext run -s dist/dev/",
     "watchprod": "cp manifest-v2.json manifest.json && parcel watch manifest.json --target prod",
     "serveprod": "web-ext run -s dist/prod/",
-    "build-v2": "cp manifest-v2.json manifest.json && parcel build manifest.json --target prod && web-ext build --overwrite-dest -s dist/prod/ -a dist/artifacts",
-    "build-v3": "cp manifest-v3.json manifest.json && parcel build manifest.json --target prod && cd dist/prod && zip -r ../artifacts/myhours-${npm_package_version}.zip *"
+    "build-v2": "mkdir -p dist/artifacts && cp manifest-v2.json manifest.json && parcel build manifest.json --target prod && web-ext build --overwrite-dest -s dist/prod/ -a dist/artifacts",
+    "build-v3": "mkdir -p dist/artifacts && cp manifest-v3.json manifest.json && parcel build manifest.json --target prod && cd dist/prod && zip -r ../artifacts/myhours-${npm_package_version}.zip *"
   },
   "dependencies": {
     "@types/node": "^18.7.6",
