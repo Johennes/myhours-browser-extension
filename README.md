@@ -1,5 +1,9 @@
 # myhours-browser-extension
 
+A browser extension for interacting with [My Hours]. Available for [Firefox] and [Chrome]. Generally usable but early in development.
+
+This project is community-maintained and not affiliated with [My Hours] in any way. Use it at your own risk and don't expect professional support.
+
 ## Development
 
 First, start the automatic rebuild with
@@ -29,4 +33,6 @@ The myhours logo is property of [My Hours] and was downloaded from their website
 Some of the networking code was inspired by [Half-Shot/my-hours-cli].
 
   [My Hours]: https://myhours.com/
+  [Chrome]: https://chrome.google.com/webstore/detail/myhours/jimjpncmiopffcffpnollbbahpmpomfd
+  [Firefox]: https://addons.mozilla.org/en-US/firefox/addon/myhours/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search
   [Half-Shot/my-hours-cli]: https://github.com/Half-Shot/my-hours-cli
