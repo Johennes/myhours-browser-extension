@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "myhours",
   "description": "Track your time on myhours.com",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "icons": {
     "48": "assets/icon-48.png",
     "96": "assets/icon-96.png",
@@ -11,7 +11,14 @@
   },
   "action": {
     "browser_style": true,
-    "default_icon": "assets/icon.svg",
+    "default_icon": {
+      "16": "assets/icon-16.png",
+      "32": "assets/icon-32.png",
+      "48": "assets/icon-48.png",
+      "96": "assets/icon-96.png",
+      "128": "assets/icon-128.png",
+      "256": "assets/icon-256.png"
+    },
     "default_title": "Track time on myhours",
     "default_popup": "src/static/Popup.html"
   },
