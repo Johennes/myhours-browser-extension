@@ -1,6 +1,6 @@
 {
   "name": "myhours-browser-extension",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Web extension for tracking time on myhours.com",
   "author": "Johannes Marbach",
   "license": "GPL-3.0-or-later",

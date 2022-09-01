@@ -95,7 +95,7 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
       setCompletions(completions);
       const filtered = filterCompletions(completions, event.target.value);
       setFiltered(filtered);
-      setShowPopup(filtered.length > 0);
+      setShowPopup(filtered.length > 0 || props.createOnEnter && !isEmpty);
     } catch (e) {
       setError(`Failed to fetch completions: ${e}`);
       setShowPopup(true);
@@ -106,7 +106,7 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
     setIsEmpty(!event.target.value.length);
     const filtered = filterCompletions(completions, event.target.value);
     setFiltered(filtered);
-    setShowPopup(filtered.length > 0);
+    setShowPopup(filtered.length > 0 || props.createOnEnter && !isEmpty);
   };
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
