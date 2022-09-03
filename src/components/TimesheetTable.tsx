@@ -32,10 +32,13 @@ import "./TimesheetTable.scss";
 
 interface IProps {
   className?: string
+  isToday: boolean
   logs: MyHoursLog[]
   onChangeLogProject: (idx: number, project: MyHoursProject) => void
   onChangeLogTask: (idx: number, task: MyHoursTask) => void
   onChangeLogDuration: (idx: number, duration: number) => void
+  onStartLog: (idx: number) => void
+  onStopLog: (idx: number) => void
   onDeleteLog: (idx: number) => void
 };
 
@@ -125,11 +128,21 @@ export const TimesheetTable: React.FC<IProps> = (props) => {
               initialValue={durationInputs[idx]}
               inputProps={{
                 placeholder: "hh:mm",
-                disabled: !log.projectId,
+                disabled: !log.projectId || log.running,
                 onKeyDown: e => onKeyDown(e, idx)
               }}/>
           </td>
           <td>
+            {!log.running && <Button
+              type={ButtonType.Default}
+              title={"▶"}
+              disabled={!props.isToday || !log.projectId}
+              onClick={_ => props.onStartLog(idx)}/>}
+            {log.running && <Button
+              type={ButtonType.Destructive}
+              title={"■"}
+              disabled={!props.isToday || !log.id || !log.projectId}
+              onClick={_ => props.onStopLog(idx)}/>}
             <Button
               type={ButtonType.Destructive}
               title="del"

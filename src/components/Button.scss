@@ -20,9 +20,7 @@
 @use "../common.scss";
 
 .Button {
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
+  display: inline;
 
   .Button_common {
     background-color: color.$background;

@@ -198,6 +198,54 @@ export class MyHoursClient {
     }
   }
 
+  async startNewLog(log: MyHoursLog): Promise<MyHoursLog> {
+    await this.ensureTokens();
+
+    const response = await fetch(`${MY_HOURS_API_BASE_URL}/logs/startNewLog`, {
+      method: "POST",
+      headers: this.headers,
+      body: JSON.stringify({ billable: false, ...log }) // TODO: Support billing
+    });
+
+    if (response.status !== 201) {
+      throw new Error(await this.extractErrorMessage(response));
+    }
+
+    return await response.json() as MyHoursLog;
+  }
+
+  async resumeLog(logId: number): Promise<MyHoursLog> {
+    await this.ensureTokens();
+
+    const response = await fetch(`${MY_HOURS_API_BASE_URL}/logs/insertAndStartFromExisting`, {
+      method: "POST",
+      headers: this.headers,
+      body: JSON.stringify({ logId, startTime: (new Date()).toISOString() })
+    });
+
+    if (response.status !== 201) {
+      throw new Error(await this.extractErrorMessage(response));
+    }
+
+    return await response.json() as MyHoursLog;
+  }
+
+  async stopLog(logId: number): Promise<MyHoursLog> {
+    await this.ensureTokens();
+
+    const response = await fetch(`${MY_HOURS_API_BASE_URL}/logs/stopTimer`, {
+      method: "POST",
+      headers: this.headers,
+      body: JSON.stringify({ logId, time: (new Date()).toISOString() })
+    });
+
+    if (response.status !== 200) {
+      throw new Error(await this.extractErrorMessage(response));
+    }
+
+    return await response.json() as MyHoursLog;
+  }
+
   async getProjects(): Promise<MyHoursProject[]> {
     await this.ensureTokens();
 

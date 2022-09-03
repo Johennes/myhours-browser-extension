@@ -31,7 +31,7 @@
   }
 
   td:nth-child(1) {
-    width: 55%;
+    width: 50%;
   }
 
   td:nth-child(2) {
@@ -43,14 +43,22 @@
   }
 
   td:nth-child(4) {
-    width: 5%;
+    width: 10%;
   }
 
   th {
     padding-bottom: 0.3em;
   }
 
-  td input, td button {
+  td input {
     width: 100%;
+  }
+
+  td Button {
+    width: calc(50% - 0.15em);
+  }
+
+  td Button:nth-child(1) {
+    margin-right: 0.15em;
   }
 }

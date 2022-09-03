@@ -2,6 +2,7 @@
 
 - Make it possible to navigate through completions with up/down arrow keys
 - Set UTF-8 charset in all pages
+- Add stop-watching (logs not yet aggregated, no duration while running)
 
 # 0.1.3 (2022-09-01)
 

@@ -39,6 +39,8 @@ export const Timesheet: React.FC<IProps> = (props) => {
   const [isReloading, setIsReloading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const isToday = date.toISOString().slice(0, 10) == (new Date()).toISOString().slice(0, 10);
+
   const reload = async () => {
     if (!needsReload) {
       return;
@@ -156,6 +158,41 @@ export const Timesheet: React.FC<IProps> = (props) => {
     }
   };
 
+  const onStartLog = async (idx: number) => {
+    const id = logs[idx].id;
+
+    try {
+      const client = await getClient();
+      if (!id) {
+        await client.startNewLog(logs[idx]);
+      } else {
+        await client.resumeLog(id);
+      }
+    } catch (e) {
+      setError(`Failed to start log: ${e}`);
+      return;
+    }
+
+    setNeedsReload(true);
+  };
+
+  const onStopLog = async (idx: number) => {
+    const id = logs[idx].id;
+    if (!id) {
+      return;
+    }
+
+    try {
+      const client = await getClient();
+      await client.stopLog(id);
+    } catch (e) {
+      setError(`Failed to stop log: ${e}`);
+      return;
+    }
+
+    setNeedsReload(true);
+  };
+
   const onDeleteLog = async (idx: number) => {
     const id = logs[idx].id;
     if (!id) {
@@ -179,10 +216,13 @@ export const Timesheet: React.FC<IProps> = (props) => {
       {isReloading && <Loader/>}
       {!isReloading && !error && <TimesheetTable
         className="table"
+        isToday={isToday}
         logs={logs}
         onChangeLogProject={async (idx, project) => await onChangeLog(idx, project, undefined, undefined)}
         onChangeLogTask={async (idx, task) => await onChangeLog(idx, undefined, task, undefined)}
         onChangeLogDuration={async (idx, duration) => await onChangeLog(idx, undefined, undefined, duration)}
+        onStartLog={onStartLog}
+        onStopLog={onStopLog}
         onDeleteLog={onDeleteLog}/>}
       {!isReloading && error && <ErrorLabel message={error}/>}
     </div>
