@@ -1,5 +1,9 @@
 # Unreleased
 
+Nothing at the moment
+
+# 0.2.0 (2022-09-03)
+
 - Make it possible to navigate through completions with up/down arrow keys
 - Set UTF-8 charset in all pages
 - Add stop-watching (logs not yet aggregated)
