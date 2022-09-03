@@ -16,7 +16,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { MyHoursTask } from "../api/structures/MyHoursTask";
 import { MyHoursProject } from "../api/structures/MyHoursProject";
@@ -43,11 +43,22 @@ interface IProps {
 };
 
 export const TimesheetTable: React.FC<IProps> = (props) => {
+  const [counter, setCounter] = useState(0);
+
   const projectInputs = props.logs.map(log => log.projectName ?? "");
   const taskInputs = props.logs.map(log => log.taskName ?? "");
-  const durationInputs = props.logs.map(log => log.duration ? formatDuration(log.duration) : "");
+  const durationInputs = props.logs.map(log => formatDuration(log) ?? "");
 
-  const totalDuration = props.logs.reduce((acc, next) => acc + (next.duration ?? 0), 0);
+  useEffect(() => {
+    for (let i = 0; i < props.logs.length; ++i) {
+      if (props.logs[i].running) {
+        setTimeout(() => {
+          setCounter(counter + 1); // Poor man's refresh
+        }, 1000);
+        return;
+      }
+    }
+  });
 
   const fetchProjects = async () => {
     const client = await getClient();
@@ -96,7 +107,7 @@ export const TimesheetTable: React.FC<IProps> = (props) => {
         <tr>
           <th>Project</th>
           <th>Task</th>
-          <th>{formatDuration(totalDuration)}</th>
+          <th>{formatDuration(...props.logs)}</th>
           <th></th>
         </tr>
       </thead>
@@ -127,7 +138,7 @@ export const TimesheetTable: React.FC<IProps> = (props) => {
             <ManagedInput
               initialValue={durationInputs[idx]}
               inputProps={{
-                placeholder: "hh:mm",
+                placeholder: "hh:mm:ss",
                 disabled: !log.projectId || log.running,
                 onKeyDown: e => onKeyDown(e, idx)
               }}/>

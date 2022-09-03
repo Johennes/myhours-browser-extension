@@ -16,6 +16,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+import { MyHoursLog } from "api/structures/MyHoursLog";
+
 export function utcMidnight(date: Date): Date {
   return new Date(date.setUTCHours(0, 0, 0, 0));
 }
@@ -42,20 +44,46 @@ export function isoDateString(date: Date): string {
   return date.toISOString().substring(0, 10);
 }
 
-export function formatDuration(totalSeconds: number): string {
+export function formatDuration(...logs: MyHoursLog[]): string | null {
+  if (logs.length === 1 && logs[0].duration == null && (!logs[0].times || logs[0].times?.length == 0)) {
+    return null;
+  }
+
+  const now = new Date();
+  let totalSeconds = 0;
+
+  for (const log of logs) {
+    if (!log.running && log.duration != null) {
+      totalSeconds += log.duration;
+      continue;
+    }
+
+    if (log.times) {
+      for (const time of log.times) {
+        if (time.duration) {
+          totalSeconds += time.duration;
+        } else if (time.running && time.startTime) {
+          const start = new Date(time.startTime);
+          if (start) {
+            totalSeconds += (now.getTime() - start.getTime()) / 1000;
+          }
+          continue;
+        }
+      }
+    }
+  }
+
+  return formatDurationFromSeconds(totalSeconds);
+}
+
+function formatDurationFromSeconds(totalSeconds: number): string {
   const hours = Math.floor(totalSeconds / 3600);
-  let minutes = Math.floor((totalSeconds - (hours * 3600)) / 60);
-  const seconds = totalSeconds - (hours * 3600) - (minutes * 60);
+  const minutes = Math.floor((totalSeconds - (hours * 3600)) / 60);
+  const seconds = Math.floor(totalSeconds - (hours * 3600) - (minutes * 60));
 
-  if (seconds >= 30) {
-    minutes += 1;
-  }
+  const format = (value: number) => value < 10 ? `0${value}` : `${value}`;
 
-  function format(value: number): string {
-    return value < 10 ? `0${value}` : `${value}`;
-  }
-
-  return [format(hours), format(minutes)].join(":");
+  return [format(hours), format(minutes), format(seconds)].join(":");
 }
 
 export function parseDuration(duration: string): number | null {
@@ -64,13 +92,16 @@ export function parseDuration(duration: string): number | null {
   }
 
   const components = duration.split(":").map(c => parseInt(c.trim()));
-  if (components.length > 2 || components.includes(NaN)) {
+  if (components.length > 3 || components.includes(NaN)) {
     return null;
   }
 
   let seconds = components[0] * 3600;
   if (components.length > 1) {
     seconds += components[1] * 60;
+  }
+  if (components.length > 2) {
+    seconds += components[2];
   }
 
   return seconds;
