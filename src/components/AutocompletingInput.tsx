@@ -20,6 +20,7 @@ import React, { createRef, InputHTMLAttributes, useEffect, useState } from "reac
 
 import { ErrorLabel } from "./ErrorLabel";
 import { ManagedInput } from "./ManagedInput";
+import { combineClassNames } from "../utils/misc";
 
 import "./AutocompletingInput.scss";
 
@@ -43,10 +44,11 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
   const [completions, setCompletions] = useState<Completion[]>([]);
   const [filtered, setFiltered] = useState<Completion[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [selectedIdx, setSelectedIdx] = useState<number>(-1);
 
   const showError = !!error;
   const showCompletions = filtered.length > 0;
-  const showCreationNote = props.createOnEnter && !isEmpty && !showError && !showCompletions;
+  const showNoneFoundNote = !isEmpty && !showError && !showCompletions;
 
   const ref = createRef<HTMLDivElement>();
 
@@ -55,6 +57,7 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
     setFiltered([]);
     setError(null);
     setShowPopup(false);
+    setSelectedIdx(-1);
   };
 
   useEffect(() => {
@@ -95,7 +98,7 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
       setCompletions(completions);
       const filtered = filterCompletions(completions, event.target.value);
       setFiltered(filtered);
-      setShowPopup(filtered.length > 0 || props.createOnEnter && !isEmpty);
+      setShowPopup(filtered.length > 0 || !isEmpty);
     } catch (e) {
       setError(`Failed to fetch completions: ${e}`);
       setShowPopup(true);
@@ -106,20 +109,41 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
     setIsEmpty(!event.target.value.length);
     const filtered = filterCompletions(completions, event.target.value);
     setFiltered(filtered);
-    setShowPopup(filtered.length > 0 || props.createOnEnter && !isEmpty);
+    setShowPopup(filtered.length > 0 || !isEmpty);
+    setSelectedIdx(-1);
+  };
+
+  const complete = (completion: Completion | string) => {
+    props.complete(completion);
+    setShowPopup(false);
+    setSelectedIdx(-1);
   };
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key !== "Enter" || isEmpty) {
+    if (event.key === "Enter") {
+      if (selectedIdx < 0) {
+        if (!isEmpty) {
+          complete(event.currentTarget.value.trim());
+        }
+      } else {
+        complete(filtered[selectedIdx]);
+      }
       return;
     }
-    props.complete(event.currentTarget.value.trim());
-    resetCompletions();
-  };
 
-  const onClick = (event: React.MouseEvent, completion: Completion) => {
-    resetCompletions();
-    props.complete(completion);
+    if (event.key === "ArrowUp") {
+      if (selectedIdx >= 0) {
+        setSelectedIdx(selectedIdx - 1);
+      }
+      return;
+    }
+
+    if (event.key === "ArrowDown") {
+      if (selectedIdx < filtered.length - 1) {
+        setSelectedIdx(selectedIdx + 1);
+      }
+      return;
+    }
   };
 
   return (
@@ -134,15 +158,17 @@ export const AutocompletingInput: React.FC<IProps> = (props) => {
         }}/>
       {showPopup && <div className="AutocompletingInput_popup_container">
         <div className="AutocompletingInput_popup">
-          {showCompletions && filtered.map((completion) =>
+          {showCompletions && filtered.map((completion, idx) =>
             <div
-              className="AutocompletingInput_item AutocompletingInput_completion"
+              ref={e => { if (idx === selectedIdx) { e?.scrollIntoView({ behavior: "smooth", block: "nearest" }); } }}
+              className={combineClassNames("AutocompletingInput_item", "AutocompletingInput_completion", idx === selectedIdx ? "AutocompletingInput_item_selected" : null)}
               key={completion.id}
-              onClick={e => onClick(e, completion)}
+              onMouseEnter={_ => setSelectedIdx(idx)}
+              onClick={_ => complete(completion)}
             >
               {completion.title}
             </div>)}
-          {showCreationNote && <div className="AutocompletingInput_item">None found. Press <b>Enter</b> to create.</div>}
+          {showNoneFoundNote && <div className="AutocompletingInput_item">None found. {props.createOnEnter && <span>Press <b>Enter</b> to create.</span>}</div>}
           {showError && <ErrorLabel className="AutocompletingInput_item" message={error}/>}
         </div>
       </div>}

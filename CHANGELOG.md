@@ -1,6 +1,6 @@
 # Unreleased
 
-Nothing at the moment
+- Make it possible to navigate through completions with up/down arrow keys
 
 # 0.1.3 (2022-09-01)
 

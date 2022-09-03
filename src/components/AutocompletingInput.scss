@@ -46,7 +46,7 @@
       border-top: 1px solid color.$border;
     }
 
-    .AutocompletingInput_completion:hover {
+    .AutocompletingInput_item_selected {
       cursor: pointer;
       background-color: color.$action;
       color: color.$text-light;
